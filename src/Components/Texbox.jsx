@@ -1,99 +1,55 @@
-import React, { useState, useRef } from 'react';
-import './Component.css'
-import { useEffect } from 'react';
+/* eslint-disable react/no-unknown-property */
+/* eslint-disable no-unused-vars */
+/* eslint-disable react/prop-types */
 
+import React, { useState, useRef, useEffect } from 'react';
+import './Component.css';
+//=============================================================================================================================================
+function Word({ Nletters }) {
+    
+    //Variabile che tiene segno di tutte le reference sul Dom, credo
+    const inputsRef = useRef([]);
 
-function SingleLetterInputBox({ id, deleteMethod, writeMethod, goPrevMethod, goNextMethod, GivenValue, focus }) {
-
-    const [isCorrect, setCorrect] = useState(true);
-
-    //funzione per il mapping della tastiera per la gestione di eventi e lo spostamento tra le caselle
-    const onKeyDown = (event) => {
-
-        if (event.key === 'Backspace') { deleteMethod(id); }
-        else if (event.key === 'ArrowLeft') { goPrevMethod(id) }
-        else if (event.key.length === 1) { writeMethod(id, event.key); }
-        else if (event.key === 'ArrowRight') { goNextMethod(id) }
+    //qui gestisco quando inserisco un lettera
+    const handleInputChange = (index, event) => {
+        if (event.target.value) {  inputsRef.current[index + 1]?.focus();  }
     };
 
-    //creazione del textbox e formattazzione
+    //qui gestisco, invece, gli eventi di quando premo gli altri tasti sulla tastiera
+    const handleKeyDown = (index, event) => {
+        if (event.key === 'Backspace' && !event.target.value) { inputsRef.current[index - 1]?.focus(); }
+        else if (event.key === 'ArrowRight')                  { inputsRef.current[index + 1]?.focus(); }
+        else if (event.key === 'ArrowLeft')                   { inputsRef.current[index - 1]?.focus(); }
+    };
+
     return (
-        <input type="text" maxLength={1}
-            id={id}
-            value={GivenValue}
-            onKeyDown={onKeyDown}
-            autoFocus={focus}
-            style={{
-                padding: '10px',
-                aspectRatio: '1 / 1',
-                width: '15px',
-                backgroundColor: isCorrect ? 'transparent' : 'red',
-                fontSize: '16px',
-                borderRadius: '4px',
-                border: '1px solid black',
-                textTransform: 'uppercase',
-                margin: '2.5px',
-                alignContent: 'center',
-            }}
-        />
+        <div>
+            <form>
+                {Array.from({ length: Nletters }, (_, index) => (
+                    <input
+                        key={index}
+                        ref={(el) => (inputsRef.current[index] = el)}
+                        type="text"
+                        maxLength={1}
+                        onChange={(event) => handleInputChange(index, event)}
+                        onKeyDown={(event) => handleKeyDown(index, event)}
+                        className='InputTextdefault'
+                    />
+                ))}
+            </form>
+        </div>
     );
 }
-
-//creazione delle caselle per parola data
-function EntireWord({ Nletters, id }) {
-
-    let index = 1;
-    const [currentWord, setCurrentWord] = useState("");
-    const [focus, setFocus] = useState(0);
-
-
-    //====================DELETE METHOD
-    const deletePrev = (id) => {
-        console.log('delete' + id);
-    }
-    //====================WRITE METHOD
-    const writeValue = (id, value) => {
-        let newWord = currentWord;
-        newWord = newWord.substring(0, id) + value + newWord.substring(id + 1);
-        setCurrentWord(newWord);
-        setFocus(id+1);
-        
-    }
-    //====================PREV METHOD
-    const goPrev = (id) => {
-        console.log('go to ' + (id - 1) + 'from' + id);
-    }
-    //====================NEXT METHOD
-    const goNext = (id) => {
-        console.log('go to ' + (id + 1) + 'from' + id);
-
-    }
-    return (<div>
-        {Array.from({ length: Nletters }, (_, i) => (
-            <SingleLetterInputBox
-                key={i}
-                id={i}
-                deleteMethod={deletePrev}
-                writeMethod={writeValue}
-                goPrevMethod={goPrev}
-                goNextMethod={goNext}
-                GivenValue={currentWord[i]}
-                focus={i==focus}
-            />
-        ))}
-    </div>
-    );
-}
-
+//=============================================================================================================================================
 function AllWord({ all }) {
     const numbers = all.split('-');
 
     return (<div>
         {Array.from({ length: numbers.length }, (_, i) => (
-            <EntireWord key={i} id={i} Nletters={numbers[i]} />
+            <Word key={i * 100} id={i * 100} Nletters={numbers[i]} />
         ))}
     </div>
     );
 }
-
+//=============================================================================================================================================
 export default AllWord;

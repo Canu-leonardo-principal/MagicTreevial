@@ -15,7 +15,7 @@ function App() {
   }
   return (
     <>
-      <AllWord all={'4'} />
+      <AllWord all={'7-4'} />
     </>
   )
 }
