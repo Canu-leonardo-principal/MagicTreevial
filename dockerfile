@@ -18,3 +18,10 @@ RUN npm install
 
 # Start the application
 CMD npm run dev
+
+
+# COMMAND TO BUILD:
+# > docker build -t magic-treevial --no-cache .
+
+# COMMAND TO RUN:
+# > docker run -it --rm -p 5173:5173 magic-treevial
