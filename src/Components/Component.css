@@ -1,24 +1,121 @@
+/*- #f8e86a; #fab659 (yellow)*/
+/*- #f9496e; #f9496e (red)*/
+/*- #00c8de; #b3e8f0 (blue)*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');/* LOBSTER FONT */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap'); /* Oswald FONT */
+
 .InputTextdefault{
     padding: 10px;
     aspect-ratio:  1 / 1;
-    width: 15px;
+    width: 30px;
     background-color: transparent;
-    font-size: 16px;
+    font-size: 31px;
     border-radius: 4px;
-    border: 1px solid black;
+    border: 2px solid #095159;
+    box-shadow: 2px 2px 0px 1px rgba(0, 0, 0, 0.1);
+    color: #1299a8 !important;
     text-transform: uppercase;
     margin: 2.5px;
     align-content: center;
+    font-family: 'Lobster', cursive;
 }
 .InputTextWrong{
     padding: 10px;
     aspect-ratio:  1 / 1;
-    width: 15px;
-    background-color: red;
-    font-size: 16px;
+    width: 30px;
+    background-color: #f9496e;
+    font-size: 31px;
     border-radius: 4px;
-    border: 1px solid black;
+    border: 2px solid #095159;
+    box-shadow: 2px 2px 0px 1px rgba(0, 0, 0, 0.1);
+    color: #1299a8 !important;
     text-transform: uppercase;
     margin: 2.5px;
     align-content: center;
+    font-family: 'Lobster', cursive;
+}
+.InputTextdefault:focus{
+    transform: scale(1.01);
+    background-color: rgba(172, 155, 255, 0.079);
+    border: 5px solid rgba(0, 0, 0, 0.5);
+}
+.InputTextWrong:focus{
+    transform: scale(1.01);
+    background-color: rgba(172, 155, 255, 0.079);
+    border: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.allWord-Div{
+    display: inline-block;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.NavBar-Div{
+    position: absolute;
+    top: 10px;
+    height: 100px;
+    background-color: #00c8de;
+    width: 99%;
+    float: left;
+    box-shadow: inset -5px -5px 0px 1px #b3e8f0;
+    border-radius: 5px;
+    align-items: center;
+    display: flex;
+    font-family: 'Lobster', cursive;
+}
+
+.NavBar-Div h1{
+    margin-left: 40px;
+}
+
+.NavBar-Div img{
+    background-color: #b3e8f0;
+    padding: 5px;
+    border-radius: 10px;
+    aspect-ratio:  1 / 1 !important;
+    height: 80px;
+    margin: 15px;
+}
+
+.Footer-Div{
+    position: absolute;
+    bottom: 0;
+    height: 200px;
+    background-color: #00c8de;
+    width: 99%;
+    box-shadow: inset -5px -5px 0px 1px #b3e8f0;
+    border-radius: 5px; 
+}
+
+.Footer-Div div{ 
+    height: 100%;
+    width: 30%;
+    margin-left: 5%;
+    float: left;
+   
+}
+.Footer-Div h2{
+    color: #f9496e !important;
+}
+.Footer-Div h4{
+    margin: 5px;
+}
+.Footer-Div a{
+    color : #004047;
+    text-decoration: none;
+}
+.Footer-Div a:hover{
+    color: #f8e86a;
+    text-decoration: none;
+    transform: scale(1.1);
+}
+.orizontalSeparator{
+    width: 20%;
+    height: 2px;
+    display: flex;
+    background-color: #f9496e;
 }

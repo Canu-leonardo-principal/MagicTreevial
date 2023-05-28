@@ -13,7 +13,7 @@ function Bottone(parola_inserita) {
             .then(response => console.log(JSON.stringify(response)))
     };*/
     
-    const fetch =
+    //const fetch =
 
     return (
         <button className="tetx" controllo={controllo} parola_inserita={parola_inserita}> invia la risposta </button>

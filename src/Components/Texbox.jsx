@@ -44,7 +44,7 @@ function Word({ Nletters }) {
 function AllWord({ all }) {
     const numbers = all.split('-');
 
-    return (<div>
+    return (<div className='allWord-Div'>
         {Array.from({ length: numbers.length }, (_, i) => (
             <Word key={i * 100} id={i * 100} Nletters={numbers[i]} />
         ))}
