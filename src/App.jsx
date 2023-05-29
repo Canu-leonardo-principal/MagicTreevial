@@ -4,6 +4,8 @@ import AllWord from './Components/Texbox'
 import HeaderBar from './Components/NavComponent';
 import FooterBar from './Components/FooterComponent';
 
+//  https://github.com/napolux/paroleitaliane/blob/master/paroleitaliane/60000_parole_italiane.txt
+
 function App() {
 
   const currentDate = new Date();
