@@ -5,6 +5,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');/* LOBSTER FONT */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@200&display=swap'); /* Oswald FONT */
 
+/*==INPUTTEXT========================================================================================================*/
 .InputTextdefault{
     padding: 10px;
     aspect-ratio:  1 / 1;
@@ -27,9 +28,9 @@
     background-color: #f9496e;
     font-size: 31px;
     border-radius: 4px;
-    border: 2px solid #095159;
+    border: 2px solid #ffa600;
     box-shadow: 2px 2px 0px 1px rgba(0, 0, 0, 0.1);
-    color: #1299a8 !important;
+    color: white;
     text-transform: uppercase;
     margin: 2.5px;
     align-content: center;
@@ -42,10 +43,11 @@
 }
 .InputTextWrong:focus{
     transform: scale(1.01);
-    background-color: rgba(172, 155, 255, 0.079);
-    border: 5px solid rgba(0, 0, 0, 0.5);
+    background-color: rgb(247, 122, 122);
+    border: 5px solid rgba(209, 255, 43, 0.5);
+    color: white;
 }
-
+/*==ALLWORD========================================================================================================*/
 .allWord-Div{
     display: inline-block;
     position: absolute;
@@ -53,7 +55,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
 }
-
+/*==NAVBAR========================================================================================================*/
 .NavBar-Div{
     position: absolute;
     top: 10px;
@@ -67,11 +69,7 @@
     display: flex;
     font-family: 'Lobster', cursive;
 }
-
-.NavBar-Div h1{
-    margin-left: 40px;
-}
-
+.NavBar-Div h1{  margin-left: 40px;  }
 .NavBar-Div img{
     background-color: #b3e8f0;
     padding: 5px;
@@ -80,7 +78,7 @@
     height: 80px;
     margin: 15px;
 }
-
+/*==FOOTER========================================================================================================*/
 .Footer-Div{
     position: absolute;
     bottom: 0;
@@ -90,7 +88,6 @@
     box-shadow: inset -5px -5px 0px 1px #b3e8f0;
     border-radius: 5px; 
 }
-
 .Footer-Div div{ 
     height: 100%;
     width: 30%;
@@ -98,12 +95,8 @@
     float: left;
    
 }
-.Footer-Div h2{
-    color: #f9496e !important;
-}
-.Footer-Div h4{
-    margin: 5px;
-}
+.Footer-Div h2{  color: #f9496e !important;  }
+.Footer-Div h4{  margin: 5px;  }
 .Footer-Div a{
     color : #004047;
     text-decoration: none;
@@ -118,4 +111,29 @@
     height: 2px;
     display: flex;
     background-color: #f9496e;
+}
+/*==CONTROL_BUTTON================================================================================================*/
+.Control_Button{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.Control_Button button{
+    background-color: #f9496e;
+    box-shadow: 2px 2px 0px 1px #ff9bb0;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid transparent;
+    color: white;
+    font-size: 25px;
+    padding: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
+    border-radius: 5px;
+    margin: 20px;
+}
+.Control_Button:active button{
+    transform: translateX(2px) translateY(2px);
+    box-shadow: 2px 2px 0px 1px transparent;
+    background-color: #ff9bb0;
 }
