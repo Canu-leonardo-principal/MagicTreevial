@@ -50,15 +50,11 @@
 /*==ALLWORD========================================================================================================*/
 .allWord-Div{
     display: inline-block;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    text-align: left !important;    
+    margin-bottom: 200px;
 }
 /*==NAVBAR========================================================================================================*/
 .NavBar-Div{
-    position: absolute;
-    top: 10px;
     height: 100px;
     background-color: #00c8de;
     width: 99%;
@@ -80,9 +76,10 @@
 }
 /*==FOOTER========================================================================================================*/
 .Footer-Div{
-    position: absolute;
-    bottom: 0;
     height: 200px;
+    position: fixed;
+    position: -webkit-sticky;
+    bottom: 0px;
     background-color: #00c8de;
     width: 99%;
     box-shadow: inset -5px -5px 0px 1px #b3e8f0;

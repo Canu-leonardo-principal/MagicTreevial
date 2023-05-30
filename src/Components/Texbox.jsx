@@ -47,7 +47,7 @@ function Word({ Nletters, onInputChange, wrongInputs, id }) {
     );
 }
 //=============================================================================================================================================
-function Control_Button({ inputValues }) {
+function Control_Button({ inputValues}) {
     const sendTry = () => {
         console.log(inputValues);
     };
@@ -72,8 +72,19 @@ function AllWord({ all, wrongs }) {
 
     };
 
-    return (
+
+    return (<>
+    <center>
         <div className="allWord-Div">
+            <h1> Ecco le regole del gioco </h1>
+        <ul>
+            <li> hai a disposizione un numero limitato di tentativi </li>
+            <li> attraverso una parola scelta casualmente verrà costruito un cruciverba </li>
+            <li> ogni lettera della parola scelte andrà a diventare l'iniziale di una nuova parola </li>
+            <li> premendo il tasto di prova, possiamo avviare i tentativi </li>
+            <li> le lettere sabgliate verranno marcate in rosso, quelle giuste no, lo scopo è indovinare la parole con ,meno tentativi posssibili </li>
+        </ul><br />
+
             {Array.from({ length: numbers.length }, (_, i) => (
                 <Word key={i * 100} id={i * 100} Nletters={numbers[i]}
                     onInputChange={(value) => handleInputChange(i, value)}
@@ -82,6 +93,8 @@ function AllWord({ all, wrongs }) {
             ))}
             <Control_Button words={all} inputValues={inputValues} />
         </div>
+        </center>
+        </>
     );
 }
 //=============================================================================================================================================
