@@ -1,16 +1,13 @@
 function Bottone(parola_inserita) {
 
     /*function controllo(parola_inserita) {
-        fetch('https://Localhost/echo/post/json', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ "id": 78912 })
-        })
-            .then(response => response.json())
-            .then(response => console.log(JSON.stringify(response)))
+        fetch("https://jsonplaceholder.typicode.com/todos", {
+  method: "POST",
+  body: JSON.stringify(parola_inserita),
+  headers: {
+    "Content-type": "application/json; charset=UTF-8"
+  }
+});
     };*/
     
     //const fetch =
