@@ -16,14 +16,14 @@ function Word({ Nletters, onInputChange, wrongInputs, id }) {
         setInputValues(newInputValues);
         onInputChange(newInputValues);  //ritorna al component AllWord le lettere mano a mano che vengono aggiunte
 
-        if (event.target.value) {  inputsRef.current[index + 1]?.focus();  }
+        if (event.target.value) { inputsRef.current[index + 1]?.focus(); }
     };
 
     //qui gestisco, invece, gli eventi di quando premo gli altri tasti sulla tastiera
     const handlerOnKeyDown = (index, event) => {
         if (event.key === 'Backspace' && !event.target.value) { inputsRef.current[index - 1]?.focus(); }
-        else if (event.key === 'ArrowRight')                  { inputsRef.current[index + 1]?.focus(); }
-        else if (event.key === 'ArrowLeft')                   { inputsRef.current[index - 1]?.focus(); }
+        else if (event.key === 'ArrowRight') { inputsRef.current[index + 1]?.focus(); }
+        else if (event.key === 'ArrowLeft') { inputsRef.current[index - 1]?.focus(); }
     };
 
     return (
@@ -47,14 +47,14 @@ function Word({ Nletters, onInputChange, wrongInputs, id }) {
     );
 }
 //=============================================================================================================================================
-function Control_Button({ inputValues}) {
+function Control_Button({ inputValues }) {
     const sendTry = () => {
         console.log(inputValues);
     };
 
     return (
         <div className="Control_Button">
-            <button onClick={sendTry}>Try!</button>
+            <button onClick={sendTry}>Prova!</button>
         </div>
     );
 }
@@ -62,7 +62,7 @@ function Control_Button({ inputValues}) {
 function AllWord({ all, wrongs }) {
     const [inputValues, setInputValues] = useState([]);
 
-    const numbers = all.split('-');
+    //const numbers = all.split('-');
     const wrongValues = wrongs.split('-');
 
     const handleInputChange = (index, value) => {
@@ -74,27 +74,26 @@ function AllWord({ all, wrongs }) {
 
 
     return (<>
-    <center>
-        <div className="allWord-Div">
-            <h1> Ecco le regole del gioco </h1>
-        <ul>
-            <li> hai a disposizione un numero limitato di tentativi </li>
-            <li> attraverso una parola scelta casualmente verrà costruito un cruciverba </li>
-            <li> ogni lettera della parola scelte andrà a diventare l'iniziale di una nuova parola </li>
-            <li> premendo il tasto di prova, possiamo avviare i tentativi </li>
-            <li> le lettere sabgliate verranno marcate in rosso, quelle giuste no, lo scopo è indovinare la parole con ,meno tentativi posssibili </li>
-        </ul><br />
-
-            {Array.from({ length: numbers.length }, (_, i) => (
-                <Word key={i * 100} id={i * 100} Nletters={numbers[i]}
-                    onInputChange={(value) => handleInputChange(i, value)}
-                    wrongInputs = {wrongValues}
-                />
-            ))}
-            <Control_Button words={all} inputValues={inputValues} />
-        </div>
+        <center>
+            <div className="allWord-Div">
+                <h1> Regole del gioco </h1>
+                <ul>
+                    <li> Hai a disposizione un numero illimitato di tentativi </li>
+                    <li> Dovrai indovinare tutte le parode del cruciverba </li>
+                    <li> L'obbiettivo è quello di trovare la parola casuale, tramite le iniziali di quella che inserirai </li>
+                    <li> Le lettere sbagliate verranno marcate in rosso </li>
+                </ul><br />
+        
+                {Array.from({ length: all.length }, (_, i) => (
+                    <Word key={i * 100} id={i * 100} Nletters={all[i]}
+                        onInputChange={(value) => handleInputChange(i, value)}
+                        wrongInputs={wrongValues}
+                    />
+                ))}
+                <Control_Button words={all} inputValues={inputValues} />
+            </div>
         </center>
-        </>
+    </>
     );
 }
 //=============================================================================================================================================

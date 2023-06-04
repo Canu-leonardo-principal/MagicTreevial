@@ -21,6 +21,11 @@
     align-content: center;
     font-family: 'Lobster', cursive;
 }
+.InputTextdefault:nth-child(1){
+    border: 5px solid #095159;
+    background-color: rgba(255, 255, 255, 0.398);
+    color: #095159 !important;
+}
 .InputTextWrong{
     padding: 10px;
     aspect-ratio:  1 / 1;
@@ -51,8 +56,18 @@
 .allWord-Div{
     display: inline-block;
     text-align: left !important;    
-    margin-bottom: 200px;
+    margin-bottom: 30px;
 }
+.allWord-Div li{
+    list-style-type: '❗';
+}
+.allWord-Div h1{
+    font-family: 'Lobster', cursive;
+    text-align: center;
+    color: #083236;
+    text-shadow: 2px 2px #00c8de;
+}
+
 /*==NAVBAR========================================================================================================*/
 .NavBar-Div{
     height: 100px;
@@ -77,7 +92,6 @@
 /*==FOOTER========================================================================================================*/
 .Footer-Div{
     height: 200px;
-    position: fixed;
     position: -webkit-sticky;
     bottom: 0px;
     background-color: #00c8de;

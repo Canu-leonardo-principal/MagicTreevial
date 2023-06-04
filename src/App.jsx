@@ -19,11 +19,14 @@ function App() {
       })
       .catch(console.error);
   }
+
+  const response_exaple = [7,11,9,8,9,2];
+
   return (
     <>
       <div className='Div-Page'>
         <HeaderBar />
-        <AllWord all={'5-9-2'} wrongs={''}/>
+        <AllWord all={response_exaple} wrongs={'1-302'}/>
         <FooterBar />
       </div>  
     </>
