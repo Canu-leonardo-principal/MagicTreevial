@@ -69,7 +69,6 @@ function AllWord({ all, wrongs }) {
         const newInputValues = [...inputValues];
         newInputValues[index] = value;
         setInputValues(newInputValues);
-
     };
 
 
