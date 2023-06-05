@@ -79,7 +79,7 @@ function AllWord({ all, wrongs }) {
                 <ul>
                     <li> Hai a disposizione un numero illimitato di tentativi </li>
                     <li> Dovrai indovinare tutte le parode del cruciverba </li>
-                    <li> L'obbiettivo è quello di trovare la parola casuale, tramite le iniziali di quella che inserirai </li>
+                    <li> L&apos;obbiettivo è quello di trovare la parola casuale, tramite le iniziali di quella che inserirai </li>
                     <li> Le lettere sbagliate verranno marcate in rosso </li>
                 </ul><br />
         
