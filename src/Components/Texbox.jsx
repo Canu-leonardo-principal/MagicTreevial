@@ -38,7 +38,7 @@ function Word({ Nletters, onInputChange, wrongInputs, id }) {
                         onChange={(event) => handlerOnChange(index, event)}
                         onKeyDown={(event) => handlerOnKeyDown(index, event)}
                         className={
-                            wrongInputs.includes((index + id).toString()) ? 'InputTextWrong' : 'InputTextdefault'
+                            wrongInputs.includes((index + id)) ? 'InputTextWrong' : 'InputTextdefault'
                         }
                     />
                 ))}
@@ -47,9 +47,11 @@ function Word({ Nletters, onInputChange, wrongInputs, id }) {
     );
 }
 //=============================================================================================================================================
-function Control_Button({ inputValues }) {
+function Control_Button({ inputValues, setWrongCells, fetchData, seedByCurrentDate }) {
     const sendTry = () => {
-        console.log(inputValues);
+        //console.log(inputValues);
+        //console.log(JSON.stringify(inputValues)); 
+        fetchData('/verify', {seed: seedByCurrentDate}, inputValues).then(res => {  setWrongCells(res);  });
     };
 
     return (
@@ -59,18 +61,19 @@ function Control_Button({ inputValues }) {
     );
 }
 //=============================================================================================================================================
-function AllWord({ all, wrongs }) {
+function AllWord({ all, fetcher, seed }) {
     const [inputValues, setInputValues] = useState([]);
+    const [wrongs, setWrong] = useState([]);
 
-    //const numbers = all.split('-');
-    const wrongValues = wrongs.split('-');
-
+    //funzione che crea gli array di parole man mano che inseriamo le lettere
     const handleInputChange = (index, value) => {
         const newInputValues = [...inputValues];
         newInputValues[index] = value;
         setInputValues(newInputValues);
     };
 
+    //funzione per settare l'arrai degli indici delle celle sbagliate
+    const setWrongCells = (newValues) => {  setWrong(newValues); }
 
     return (<>
         <center>
@@ -86,10 +89,10 @@ function AllWord({ all, wrongs }) {
                 {Array.from({ length: all.length }, (_, i) => (
                     <Word key={i * 100} id={i * 100} Nletters={all[i]}
                         onInputChange={(value) => handleInputChange(i, value)}
-                        wrongInputs={wrongValues}
+                        wrongInputs={wrongs}
                     />
                 ))}
-                <Control_Button words={all} inputValues={inputValues} />
+                <Control_Button words={all} inputValues={inputValues} setWrongCells={setWrongCells} fetchData={fetcher} seedByCurrentDate={seed} />
             </div>
         </center>
     </>

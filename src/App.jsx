@@ -6,6 +6,7 @@ import './App.css'
 import AllWord from './Components/Texbox'
 import HeaderBar from './Components/NavComponent';
 import FooterBar from './Components/FooterComponent';
+import Win from './Components/Win';
 //  https://tanstack.com/query/v3/docs/react/overview
 import { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider, } from 'react-query'
 import { useEffect, useState } from 'react';
@@ -18,13 +19,11 @@ const queryClient = new QueryClient();
 
 function Loader({fetchData}) {
   const [data, setData] = useState([]);
-  const [wrongs, setWorngs] = useState([]);
-
-  const setNewWorngs = (newWrongs) => {  setWorngs(newWrongs);  }
   
-  const currentDate = new Date();
-  const seedBydate = currentDate.getTime().toString();// creo il seed da mandare all'API per la creazione del cruciverba  
+  const seedByCurrentDate = new Date().getTime().toString();// creo il seed da mandare all'API per la creazione del cruciverba  
+  //const seedByCurrentDate = 1685991514711;
 
+  /*
   useEffect(() => {
     if (data.length === 0)
     {
@@ -35,30 +34,47 @@ function Loader({fetchData}) {
       fetchData('/');
     }
   }, [data]);
+  */
+
+  useEffect(() => {
+    fetchData('/start', {seed: seedByCurrentDate}).then(res => {  setData(res);  }); 
+  }, []);
 
   return (
     <>
-      <AllWord all={data} wrongs={wrongs} />
+      <AllWord all={data} fetcher={fetchData} seed={seedByCurrentDate} />
     </>
   );
 }
 
 function App() {
 
-  const fetcher = (url, options = {}) => {
-    const queryParams = '?' + new URLSearchParams(options).toString();
-    return fetch('http://localhost/' + url + queryParams)
-      .then((res) => {
-        return res.json();
-      })
-      .catch(console.error);
+  const fetchData = (url, options = {}, _body) => {
+    if (_body === undefined) {
+      const queryParams = '?' + new URLSearchParams(options).toString();
+      return fetch('http://localhost' + url + queryParams)
+        .then((res) => {
+          return res.json();
+        })
+        .catch(console.error);
+    }
+    else
+    {
+      const queryParams = '?' + new URLSearchParams(options).toString();
+      return fetch('http://localhost' + url + queryParams, {body: JSON.stringify(_body), method: 'POST'})
+        .then((res) => {
+          return res.json();
+        })
+        .catch(console.error);
+    }
+    
   }
 
   return (
     <>
       <div className='Div-Page'>
           <HeaderBar />
-          <Loader fetchData={fetcher} />
+          <Loader fetchData={fetchData} />
           <FooterBar />        
       </div>
     </>
