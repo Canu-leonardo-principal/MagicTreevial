@@ -47,11 +47,12 @@ function Word({ Nletters, onInputChange, wrongInputs, id }) {
     );
 }
 //=============================================================================================================================================
-function Control_Button({ inputValues, setWrongCells, fetchData, seedByCurrentDate }) {
+function Control_Button({ inputValues, setWrongCells, fetchData, seedByCurrentDate, setWin }) {
     const sendTry = () => {
         //console.log(inputValues);
         //console.log(JSON.stringify(inputValues)); 
         fetchData('/verify', {seed: seedByCurrentDate}, inputValues).then(res => {  setWrongCells(res);  });
+        setWin(true);
     };
 
     return (
@@ -61,7 +62,7 @@ function Control_Button({ inputValues, setWrongCells, fetchData, seedByCurrentDa
     );
 }
 //=============================================================================================================================================
-function AllWord({ all, fetcher, seed }) {
+function AllWord({ all, fetcher, seed, setWin }) {
     const [inputValues, setInputValues] = useState([]);
     const [wrongs, setWrong] = useState([]);
 
@@ -92,7 +93,7 @@ function AllWord({ all, fetcher, seed }) {
                         wrongInputs={wrongs}
                     />
                 ))}
-                <Control_Button words={all} inputValues={inputValues} setWrongCells={setWrongCells} fetchData={fetcher} seedByCurrentDate={seed} />
+                <Control_Button words={all} inputValues={inputValues} setWrongCells={setWrongCells} fetchData={fetcher} seedByCurrentDate={seed} setWin={setWin}/>
             </div>
         </center>
     </>

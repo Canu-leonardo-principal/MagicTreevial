@@ -10,6 +10,7 @@ import Win from './Components/Win';
 //  https://tanstack.com/query/v3/docs/react/overview
 import { useQuery, useMutation, useQueryClient, QueryClient, QueryClientProvider, } from 'react-query'
 import { useEffect, useState } from 'react';
+import { render } from 'react-dom';
 //  words:
 //  https://github.com/napolux/paroleitaliane/blob/master/paroleitaliane/60000_parole_italiane.txt
 
@@ -17,34 +18,17 @@ import { useEffect, useState } from 'react';
 // Create a client
 const queryClient = new QueryClient();
 
-function Loader({fetchData}) {
+function Loader({ fetchData }) {
   const [data, setData] = useState([]);
-  
+  const [win, setWin] = useState(false)
+
   const seedByCurrentDate = new Date().getTime().toString();// creo il seed da mandare all'API per la creazione del cruciverba  
-  //const seedByCurrentDate = 1685991514711;
-
-  /*
-  useEffect(() => {
-    if (data.length === 0)
-    {
-      fetchData('/start', {seed: seedBydate}).then(res => {  setData(res);  }); 
-    }
-    else
-    {
-      fetchData('/');
-    }
-  }, [data]);
-  */
 
   useEffect(() => {
-    fetchData('/start', {seed: seedByCurrentDate}).then(res => {  setData(res);  }); 
+    fetchData('/start', { seed: seedByCurrentDate }).then(res => { setData(res); });
   }, []);
 
-  return (
-    <>
-      <AllWord all={data} fetcher={fetchData} seed={seedByCurrentDate} />
-    </>
-  );
+  return (  <>  {  !win ? <AllWord all={data} fetcher={fetchData} seed={seedByCurrentDate} setWin={setWin} /> : <Win />  }  </>  )
 }
 
 function App() {
@@ -58,24 +42,23 @@ function App() {
         })
         .catch(console.error);
     }
-    else
-    {
+    else {
       const queryParams = '?' + new URLSearchParams(options).toString();
-      return fetch('http://localhost' + url + queryParams, {body: JSON.stringify(_body), method: 'POST'})
+      return fetch('http://localhost' + url + queryParams, { body: JSON.stringify(_body), method: 'POST' })
         .then((res) => {
           return res.json();
         })
         .catch(console.error);
     }
-    
+
   }
 
   return (
     <>
       <div className='Div-Page'>
-          <HeaderBar />
-          <Loader fetchData={fetchData} />
-          <FooterBar />        
+        <HeaderBar />
+        <Loader fetchData={fetchData} />
+        <FooterBar />
       </div>
     </>
   )
