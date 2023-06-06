@@ -5,8 +5,10 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Component.css";
 
-function Win() {
+function Win({setWin}) {
   const reloadPage = () => {
+    localStorage.removeItem('seed');
+    setWin(false);
     location.reload();
   };
   return (

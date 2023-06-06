@@ -47,12 +47,36 @@ function Word({ Nletters, onInputChange, wrongInputs, id }) {
     );
 }
 //=============================================================================================================================================
-function Control_Button({ inputValues, setWrongCells, fetchData, seedByCurrentDate, setWin }) {
+function Control_Button({ words, inputValues, setWrongCells, fetchData, seedByCurrentDate, setWin,  wrongs }) {
     const sendTry = () => {
         //console.log(inputValues);
         //console.log(JSON.stringify(inputValues)); 
-        fetchData('/verify', {seed: seedByCurrentDate}, inputValues).then(res => {  setWrongCells(res);  });
-        setWin(true);
+        fetchData('/verify', {seed: seedByCurrentDate}, inputValues).then(res => {  setWrongCells(res); console.log(res)});
+        //console.log(res);
+        let winCon = true;
+
+        for (let i = 0; i < inputValues.length; i++)
+        {
+            if (inputValues[i].length !== words[i])
+            {
+                winCon = false;
+                break;
+            }
+        }
+
+        console.log(wrongs);
+
+        if ((winCon) && (wrongs.length === 0))
+        {
+            setWin(true);
+        }
+        else
+        {
+            winCon = false;
+        }
+        //setWin(true);
+
+        
     };
 
     return (
@@ -93,7 +117,8 @@ function AllWord({ all, fetcher, seed, setWin }) {
                         wrongInputs={wrongs}
                     />
                 ))}
-                <Control_Button words={all} inputValues={inputValues} setWrongCells={setWrongCells} fetchData={fetcher} seedByCurrentDate={seed} setWin={setWin}/>
+                <Control_Button words={all} inputValues={inputValues} setWrongCells={setWrong} fetchData={fetcher} seedByCurrentDate={seed} 
+                setWin={setWin} wrongs={wrongs}/>
             </div>
         </center>
     </>

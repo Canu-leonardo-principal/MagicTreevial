@@ -20,15 +20,22 @@ const queryClient = new QueryClient();
 
 function Loader({ fetchData }) {
   const [data, setData] = useState([]);
-  const [win, setWin] = useState(false)
+  const [win, setWin] = useState(false);
 
-  const seedByCurrentDate = new Date().getTime().toString();// creo il seed da mandare all'API per la creazione del cruciverba  
+  //const [seedByCurrentDate, setSeedByCurrentDate] = useState(0);
+
+  if (localStorage.getItem('seed') === null)
+  {
+    localStorage.setItem('seed', new Date().getTime().toString());
+
+  }
 
   useEffect(() => {
-    fetchData('/start', { seed: seedByCurrentDate }).then(res => { setData(res); });
+    
+    fetchData('/start', { seed: localStorage.getItem('seed') }).then(res => { setData(res); });
   }, []);
 
-  return (  <>  {  !win ? <AllWord all={data} fetcher={fetchData} seed={seedByCurrentDate} setWin={setWin} /> : <Win />  }  </>  )
+  return (  <>  {  !win ? <AllWord all={data} fetcher={fetchData} seed={localStorage.getItem('seed')} setWin={setWin} /> : <Win setWin={setWin} />  }  </>  )
 }
 
 function App() {
@@ -36,7 +43,7 @@ function App() {
   const fetchData = (url, options = {}, _body) => {
     if (_body === undefined) {
       const queryParams = '?' + new URLSearchParams(options).toString();
-      return fetch('http://localhost' + url + queryParams)
+      return fetch('http://172.21.113.252:8080' + url + queryParams)
         .then((res) => {
           return res.json();
         })
@@ -44,7 +51,7 @@ function App() {
     }
     else {
       const queryParams = '?' + new URLSearchParams(options).toString();
-      return fetch('http://localhost' + url + queryParams, { body: JSON.stringify(_body), method: 'POST' })
+      return fetch('http://172.21.113.252:8080' + url + queryParams, { body: JSON.stringify(_body), method: 'POST' })
         .then((res) => {
           return res.json();
         })
